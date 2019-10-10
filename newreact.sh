@@ -9,5 +9,6 @@ else
 cd ~/desktop
 git clone https://github.com/imjackson/react-starter.git $1
 cd $1
+code .
 npm i
 fi
