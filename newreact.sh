@@ -2,7 +2,7 @@
 
 if [[ $1 == "" ]];
 then
-printf '\nName your directory idiot!'
+printf '\nName your new directory!'
 printf '\nLike so: newreact.sh app_name'
 printf '\n \n'
 else
