@@ -1,38 +1,41 @@
 #!/bin/bash
 
+# navigate to snippets directory and pull from master branch
+cd_and_pull() {
+    cd "$path"
+    echo -e "\n - Pulling snippets from master branch\n"
+    git pull origin master
+}
+
+# create snippets folder, initialize as git repo, pull from snippets master branch
+init_and_pull() {
+    echo -e "\n - No snippets directory found, creating one now at $path\n"
+    mkdir "$1"
+    cd "$1"
+    git init
+    echo -e "\n - Pulling snippets from master branch\n"
+    git remote add origin git@github.com:imjackson/vscode-snippets.git
+    git pull origin master
+}
+
+# decide which function to call based on if the snippets directory exists
+init_or_cd() {
+    if [[ -d $1 ]]; then
+        cd_and_pull $1
+    else
+        init_and_pull $1
+    fi
+}
+
 # get ostype
 os="$OSTYPE"
 
 if [[ "$os" =~ ^linux ]]; then
     path=~/.config/Code/User/snippets
-    if [[ -d $path ]]; then
-        cd $path
-        echo -e "\n - Pulling snippets from master branch\n"
-        git pull origin master
-    else
-        echo -e "\n - No snippets directory found, creating one now at $path\n"
-        mkdir $path
-        cd $path
-        git init
-        echo -e "\n - Pulling snippets from master branch\n"
-        git remote add origin git@github.com:imjackson/vscode-snippets.git
-        git pull origin master
-    fi
+    init_or_cd $path
 elif [[ "$os" =~ ^darwin ]]; then
     path=~/Library/Application\ Support/Code/User/snippets
-    if [[ -d $path ]]; then
-        cd "$path"
-        echo -e "\n - Pulling snippets from master branch\n"
-        git pull origin master
-    else
-        echo -e "\n - No snippets directory found, creating one now at $path\n"
-        mkdir "$path"
-        cd "$path"
-        git init
-        echo -e "\n - Pulling snippets from master branch\n"
-        git remote add origin git@github.com:imjackson/vscode-snippets.git
-        git pull origin master
-    fi
+    init_or_cd $path
 else
     echo "Not sure where to find the Snippets directory"
 fi
