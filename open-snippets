@@ -1,32 +1,33 @@
 #!/bin/bash
 
+# prompt user to run sync script
+prompt_sync() {
+    echo -e "\nSnippets directory not found...\n"
+    read -p "Run sync-snippets script? (y/n) " ans
+    if [[ "$ans" == "y" ]]; then
+        sync-snippets
+    fi
+}
+
+# navigate to snippets directory if it exists, run prompt function if not
+cd_or_prompt() {
+    if [[ -d $path ]]; then
+        cd "$path"
+        code .
+    else
+        prompt_sync
+    fi
+}
+
 # get ostype
 os="$OSTYPE"
 
 if [[ "$os" =~ ^linux ]]; then
     path=~/.config/Code/User/snippets
-    if [[ -d $path ]]; then
-        cd $path
-        code .
-    else
-        echo -e "\nSnippets directory not found...\n"
-        read -p "Run sync-snippets script? (y/n) " ans
-        if [[ "$ans" == "y" ]]; then
-            sync-snippets
-        fi
-    fi
+    cd_or_prompt $path   
 elif [[ "$os" =~ ^darwin ]]; then
     path=~/Library/Application\ Support/Code/User/snippets
-    if [[ -d $path ]]; then
-        cd "$path"
-        code .
-    else
-        echo -e "\n Snippets directory not found...\n"
-        read -p "Run sync-snippets script? (y/n) " ans
-        if [[ "$ans" == "y" ]]; then
-            sync-snippets
-        fi
-    fi
+    cd_or_prompt $path
 else
     echo "Not sure where to find the Snippets directory"
 fi
