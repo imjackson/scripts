@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+    echo -e "\n - You forgot to provide a name for your new project!"
+    echo -e "\n - Run the script like so: newreact app_name\n"
+else
+    git clone https://github.com/imjackson/react-starter.git $1
+    cd $1
+    code .
+    npm i
+fi
