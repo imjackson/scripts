@@ -10,8 +10,8 @@ This is a collection of very basic bash scripts to speed up certain repetitive t
 
 **`opensnippets-ubuntu.sh` (Ubuntu)**: A duplicate of the script above, though for Ubuntu filesystem.
 
-**`sync-snippets-osx` (OSX)**: An OSX script for pulling new vscode user snippets from GitHub.
-
-**`sync-snippet-ubuntu` (Ubuntu)**: A duplicate of the script above, though for Ubuntu filesystem.
+**`sync-snippets`** Navigates to VSCode user snippets directory and pulls from
+master. If directory doesn't exist, it is automatically created and pulls from
+master. 
 
 **`folderized_comp.sh`**: A script for creating a folderized react component structure.
