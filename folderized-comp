@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+    echo -e "\n - You forgot to name your new component directory!"
+    echo -e "\n - Run the script like so: folderized-comp 'component-name'\n"
+else
+    mkdir $1
+    cd $1
+    touch $1.js && touch $1.css
+    echo "export { default } from './$1'" >> index.js
+fi
