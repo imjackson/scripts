@@ -16,9 +16,9 @@ if [[ "$os" =~ ^linux ]]; then
         fi
     fi
 elif [[ "$os" =~ ^darwin ]]; then
-    path=~/Library/'Application Support'/Code/User/snippets
+    path=~/Library/Application\ Support/Code/User/snippets
     if [[ -d $path ]]; then
-        cd $path
+        cd "$path"
         code .
     else
         echo -e "\n Snippets directory not found...\n"
