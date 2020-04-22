@@ -16,7 +16,7 @@ script.
 master. If directory doesn't exist, it is automatically created and pulls from
 master. 
 
-**`folderized_comp.sh`**: A script for creating a folderized react component structure.
+**`folderized-comp`**: Creates a folderized React component structure.
 
 ## License
 This repository is maintained with the [GNU General Public License
